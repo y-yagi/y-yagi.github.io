@@ -1,4 +1,4 @@
-# Generated on 2014-09-12 using generator-reveal 0.3.9
+# Generated on 2014-09-14 using generator-reveal 0.3.9
 module.exports = (grunt) ->
 
     grunt.initConfig
@@ -90,6 +90,18 @@ module.exports = (grunt) ->
                 }]
 
         
+        buildcontrol:
+
+            options:
+                dir: 'dist'
+                commit: true
+                push: true
+                message: 'Built from %sourceCommit% on branch %sourceBranch%'
+            pages:
+                options:
+                    remote: 'git@github.com:y-yagi/y-yagi.github.io.git'
+                    branch: 'gh-pages'
+        
 
 
     # Load all grunt tasks.
@@ -139,6 +151,12 @@ module.exports = (grunt) ->
             'copy'
         ]
 
+    
+    grunt.registerTask 'deploy',
+        'Deploy to Github Pages', [
+            'dist'
+            'buildcontrol'
+        ]
     
 
     # Define default task.
